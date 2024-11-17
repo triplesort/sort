@@ -21,9 +21,12 @@ header,article,footer {
     flex-wrap: wrap;
     flex-direction: column;
 }
-footer {
-    height: 10vh;
-}
+/* article {
+    align-content: space-around;
+} */
+/* footer { */
+    /* height: 10vh; */
+/* } */
 button {
     width: 12.75vh;
     height: 9.18vh;
@@ -60,5 +63,30 @@ table-wrap {
     padding: 10px 10px 5px 10px;
 }
 button-wrap {
+    width: 70%;
+    display: flex;
+    justify-content: space-around;
+}
+member {
+    width: 20vw;
+    background-color: #000;
+    border-radius: 1.6vw;
+    cursor: pointer;
+    /* margin: 0% 5%; */
+    display: inline-block;
+    padding: 10px;
+    font-weight: bold;
+}
+img {
     width: 100%;
+    display: inline-block;
+}
+@media (max-width: 500px) {
+    member {
+        width: 40vw;
+        border-radius: 3.2vw;
+    }
+    button-wrap {
+        width: 100%;
+    }
 }
