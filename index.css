@@ -9,6 +9,11 @@ body {
     text-align: center;
     word-break: keep-all;
 }
+/* main { */
+    /* display: flex; */
+    /* align-items: ; */
+    /* flex-direction: column; */
+/* } */
 header {
     height: 20vh;
     font-size: 25px;
@@ -24,9 +29,12 @@ header,article,footer {
 /* article {
     align-content: space-around;
 } */
-/* footer { */
-    /* height: 10vh; */
-/* } */
+footer {
+    height: 10vh;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
 button {
     width: 12.75vh;
     height: 9.18vh;
@@ -69,7 +77,7 @@ button-wrap {
 }
 member {
     width: 20vw;
-    background-color: #000;
+    border: 3px solid #000;
     border-radius: 1.6vw;
     cursor: pointer;
     /* margin: 0% 5%; */
@@ -80,11 +88,17 @@ member {
 img {
     width: 100%;
     display: inline-block;
+    border: 1px solid #000;
+    border-radius: 1.38vw;
+    /* box-shadow: 1px 0px black, 0px 1px black, 0px -1px black, -1px 0px black; */
 }
 @media (max-width: 500px) {
     member {
         width: 40vw;
         border-radius: 3.2vw;
+    }
+    img {
+        border-radius: 2.76vw;
     }
     button-wrap {
         width: 100%;
