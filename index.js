@@ -19,7 +19,32 @@ function run() {
     const queue = []
     var popped = []
     var progress = 0
-    const data = [["윤서연","SeoYeon","22aeff","fff","a06a58b3-0e42-412b-8fbd-5365e8b2e600"],["정혜린","HyeRin","9200ff","fff","cb680cdb-c828-462b-d407-31a40844d600"],["이지우","JiWoo","fff800","000","2c62b9ea-41eb-4e46-503c-a3843466d300"],["김채연","ChaeYeon","98f21d","000","719345ef-e209-4170-3317-64d3a3dbae00"],["김유연","YooYeon","db0c74","fff","e554dd93-82ca-433b-62fb-995f78d91000"],["김수민","SooMin","fc83a4","000","84ae2a1e-8972-42c3-a250-ce5c1032c100"],["김나경","NaKyoung","6799a0","fff","cdd4c4d5-c26b-4aba-b616-74fb713fcd00"],["공유빈","YuBin","ffe3e2","000","bdb01dd6-577f-4d76-ad23-a539009c9000"],["카에데","Kaede","ffc935","000","13d30fb7-48b4-4a30-1de0-10f2874cae00"],["서다현","DaHyun","ff9ad6","000","3853ee30-1bf6-4623-2556-b681a189e200"],["코토네","Kotone","ffde00","000","fb6c3c0f-3cad-41d6-30fc-b751e3f6b200"],["곽연지","YeonJi","5974ff","fff","46e4e926-2f1c-4a7f-4893-c59dd1821400"],["니엔","Nien","ff953f","000","61d0d89b-4be4-4fc8-dc2e-f6471188d200"],["박소현","SoHyun","1222b5","fff","ea6f4fc2-0e45-4d42-4248-0351a96fda00"],["신위","Xinyu","d51313","fff","aa73ddfe-b71f-4663-9114-dec3879ac300"],["마유","Mayu","fe8e76","000","a8ae074e-bcd4-420d-8861-27195e1a2400"],["린","Lynn","ac62b7","fff","d7ddd86a-f1ea-4e8c-31ed-6bd595e09000"],["주빈","JooBin","b7f54c","000","e08a3ba9-5f81-4f45-a86d-317b76c3cb00"],["정하연","HaYeon","52d9bb","000","2205be67-580e-4503-e585-30e96c574d00"],["박시온","ShiOn","ff428a","fff","c3196100-19d9-4867-528d-18be331acb00"],["김채원","ChaeWon","c7a3e0","000","4e8aff40-5e18-4419-b8e2-b6f7dbf86f00"],["설린","Sullin","7bba8d","000","750165a9-f63b-4c7e-0fbf-79e8472b8a00"],["서아","SeoAh","cff3ff","000","abf91c58-9694-415b-a7a6-5b6e1fedbf00"],["지연","JiYeon","ffab62","000","963b5e47-f8e0-4be4-a797-3b7753152800"]]
+    const data = [
+        ["윤서연","SeoYeon","22aeff","fff","a06a58b3-0e42-412b-8fbd-5365e8b2e600"],
+        ["정혜린","HyeRin","9200ff","fff","cb680cdb-c828-462b-d407-31a40844d600"],
+        ["이지우","JiWoo","fff800","000","2c62b9ea-41eb-4e46-503c-a3843466d300"],
+        ["김채연","ChaeYeon","98f21d","000","719345ef-e209-4170-3317-64d3a3dbae00"],
+        ["김유연","YooYeon","db0c74","fff","e554dd93-82ca-433b-62fb-995f78d91000"],
+        ["김수민","SooMin","fc83a4","000","84ae2a1e-8972-42c3-a250-ce5c1032c100"],
+        ["김나경","NaKyoung","6799a0","fff","ed3dece3-7e52-412f-5db2-6b4e92092100"],
+        ["공유빈","YuBin","ffe3e2","000","f693c934-3059-4b92-b44a-3826605b2500"],
+        ["카에데","Kaede","ffc935","000","e724420e-23eb-42a1-0155-79b17708d800"],
+        ["서다현","DaHyun","ff9ad6","000","dd72bafe-8d65-496c-16f8-85daa2be7900"],
+        ["코토네","Kotone","ffde00","000","5b158bdb-2425-4bd9-2a56-60864add6e00"],
+        ["곽연지","YeonJi","5974ff","fff","dc10b38f-d94f-4539-8700-92521dfb6c00"],
+        ["니엔","Nien","ff953f","000","61d0d89b-4be4-4fc8-dc2e-f6471188d200"],
+        ["박소현","SoHyun","1222b5","fff","ea6f4fc2-0e45-4d42-4248-0351a96fda00"],
+        ["신위","Xinyu","d51313","fff","aa73ddfe-b71f-4663-9114-dec3879ac300"],
+        ["마유","Mayu","fe8e76","000","a8ae074e-bcd4-420d-8861-27195e1a2400"],
+        ["린","Lynn","ac62b7","fff","d7ddd86a-f1ea-4e8c-31ed-6bd595e09000"],
+        ["주빈","JooBin","b7f54c","000","e08a3ba9-5f81-4f45-a86d-317b76c3cb00"],
+        ["정하연","HaYeon","52d9bb","000","2205be67-580e-4503-e585-30e96c574d00"],
+        ["박시온","ShiOn","ff428a","fff","c3196100-19d9-4867-528d-18be331acb00"],
+        ["김채원","ChaeWon","c7a3e0","000","4e8aff40-5e18-4419-b8e2-b6f7dbf86f00"],
+        ["설린","Sullin","7bba8d","000","750165a9-f63b-4c7e-0fbf-79e8472b8a00"],
+        ["서아","SeoAh","cff3ff","000","abf91c58-9694-415b-a7a6-5b6e1fedbf00"],
+        ["지연","JiYeon","ffab62","000","963b5e47-f8e0-4be4-a797-3b7753152800"]
+    ]
     const init=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
     const temp = init.map(v=>[v,Math.random()]).sort((x,y)=>x[1]-y[1]).map(v=>v[0])
     for (let i=0;i<8;i++){
