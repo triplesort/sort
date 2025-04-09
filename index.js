@@ -8,7 +8,7 @@ function run() {
     span_progress.style.color = '#fff'
     span_progress.style.width = '90%'
     span_progress.style.background = `#000`
-    const obj={
+    var obj={
         a1:[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
         a2:[[,,],[,,],[,,],[,,],[,,],[,,],[,,],[,,],[],[],[],[],[],[],[],[]],
         a3:[[,,,,],[,,,,],[,,,,],[,,,,],[,,],[,,],[,,],[,,]],
@@ -16,7 +16,7 @@ function run() {
         a5:[[,,,,,,,,,,,,,,,,],[,,,,,,,,]],
         a6:[[,,,,,,,,,,,,,,,,,,,,,,,,]]
     }
-    const queue = []
+    var queue = []
     var popped = []
     var progress = 0
     const data = [
@@ -45,22 +45,6 @@ function run() {
         ["서아","SeoAh","cff3ff","000","222fb02c-52d2-4f54-3e78-28a9cfad8800"],
         ["지연","JiYeon","ffab62","000","0fcde351-a7f4-4d2a-37d3-9e9750254000"]
     ]
-    const init=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
-    const temp = init.map(v=>[v,Math.random()]).sort((x,y)=>x[1]-y[1]).map(v=>v[0])
-    for (let i=0;i<8;i++){
-        obj.a1[i].push(temp[3*i])
-        obj.a1[i+8].push(temp[3*i+1])
-        obj.a2[i+8].push(temp[3*i+2])
-        queue.push(['a1',i,0,0])
-        queue.push(['a2',i,0,0])
-    }
-    for (let i=0;i<4;i++) {
-        queue.push(['a3',i,0,0])
-    }
-    for (let i=0;i<2;i++) {
-        queue.push(['a4',i,0,0])
-    }
-    queue.push(['a5',0,0,0])
     
     function popping() {
         if (queue.length==0) {
@@ -74,6 +58,7 @@ function run() {
         const right = callData(arr[popped[1]*2+1][popped[3]])
         if (left && right) {
             queue.splice(queue.indexOf(popped),1)
+            if (progress) localStorage.setItem("suspended",JSON.stringify({"obj":obj,"queue":queue,"popped":popped,"progress":progress}))
             if (Math.random()<0.5) {
                 display(btn_left,left,select0)
                 display(btn_right,right,select1)
@@ -145,33 +130,56 @@ function run() {
         span_progress.innerText = (progress*100/112).toFixed(1)+'%'
         span_progress.style.background = `linear-gradient(to right, #6e2cff ${progress*100/112}%, #000 ${progress*100/112}%)`
         while (popping()) {}
-        // select(0)
+        select(0)
         return 0
     }
     
     function result() {
+        localStorage.suspended=""
         btn_left.remove()
         btn_right.remove()
         const final = obj.a6[0].map(v=>callData(v))
         localStorage.setItem("prevResults",JSON.stringify({"date":Date.now(),"results":final.map(v=>v[1])}))
         const content = final.map(v=>`<tr><td>${final.indexOf(v)+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td></tr>`).join('')
-        // const content2 = final.slice(0,12).map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td><td>${i+13}</td><td style="background:#${final[i+12][2]};color:#${final[i+12][3]}">${final[i+12][language]}</td></tr>`).join('')
+        const content2 = final.slice(0,12).map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td><td>${i+13}</td><td style="background:#${final[i+12][2]};color:#${final[i+12][3]}">${final[i+12][language]}</td></tr>`).join('')
         const table = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${content}</tbody></table>`
-        // const table2 = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${content2}</tbody></table>`
+        const table2 = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${content2}</tbody></table>`
         span_progress.remove()
         document.querySelector('footer').remove()
         const btn_save = document.createElement('button')
+        const btn_mode = document.createElement('button')
         const btn_save_wrap = document.createElement('div')
+        const overflowArea = document.createElement('div')
         btn_save.addEventListener('click',()=>{
             capture()
         })
+        var tableMode = 0
+        const tablewrap = document.createElement('table-wrap')
+        tablewrap.style.display="inline-block";
+        overflowArea.style.overflowX="auto";
+        overflowArea.style.width="100%";
+        btn_mode.addEventListener('click',()=>{
+            if (tableMode) {
+                tablewrap.innerHTML = table
+                btn_mode.innerHTML = language ? '2 columns' : '두 줄로'
+                tableMode=0
+            }
+            else {
+                tablewrap.innerHTML = table2
+                btn_mode.innerHTML = language ? '1 column' : '한 줄로'
+                tableMode=1
+            }
+        })
         btn_save.innerHTML = language ? 'Save' : '저장'
         btn_save.style.cssText = 'margin:10px !important'
+        btn_mode.innerHTML = language ? '2 lines' : '두 줄로'
+        btn_mode.style.cssText = 'margin:10px !important'
         btn_save_wrap.append(btn_save)
-        const tablewrap = document.createElement('table-wrap')
+        btn_save_wrap.append(btn_mode)
         tablewrap.innerHTML = table
         document.querySelector('article').append(btn_save_wrap)
-        document.querySelector('article').append(tablewrap)
+        document.querySelector('article').append(overflowArea)
+        overflowArea.append(tablewrap)
         document.querySelector('article').style.height = ''
         return 0
     }
@@ -207,7 +215,47 @@ function run() {
         return 0
     }
     
-    while (popping()) {}
+    if (localStorage.getItem("suspended") && confirm(language?"There is a suspended Sort. Do you want to continue?":"중단된 Sort가 있습니다. 계속하시겠습니까?")) {
+        const suspenedData = JSON.parse(localStorage.getItem("suspended"))
+        obj = suspenedData.obj
+        queue = suspenedData.queue
+        popped = suspenedData.popped
+        progress = suspenedData.progress
+
+        const arr = obj[popped[0]]
+        const left = callData(arr[popped[1]*2][popped[2]])
+        const right = callData(arr[popped[1]*2+1][popped[3]])
+        
+        if (Math.random()<0.5) {
+            display(btn_left,left,select0)
+            display(btn_right,right,select1)
+        } else {
+            display(btn_right,left,select0)
+            display(btn_left,right,select1)
+        }
+
+        span_progress.innerText = (progress*100/112).toFixed(1)+'%'
+        span_progress.style.background = `linear-gradient(to right, #6e2cff ${progress*100/112}%, #000 ${progress*100/112}%)`
+    } else {
+        localStorage.suspended = ""
+        const init=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+        const temp = init.map(v=>[v,Math.random()]).sort((x,y)=>x[1]-y[1]).map(v=>v[0])
+        for (let i=0;i<8;i++){
+            obj.a1[i].push(temp[3*i])
+            obj.a1[i+8].push(temp[3*i+1])
+            obj.a2[i+8].push(temp[3*i+2])
+            queue.push(['a1',i,0,0])
+            queue.push(['a2',i,0,0])
+        }
+        for (let i=0;i<4;i++) {
+            queue.push(['a3',i,0,0])
+        }
+        for (let i=0;i<2;i++) {
+            queue.push(['a4',i,0,0])
+        }
+        queue.push(['a5',0,0,0])
+        while (popping()) {}
+    }
 
     document.querySelector('button-wrap').append(btn_left)
     document.querySelector('button-wrap').append(btn_right)
