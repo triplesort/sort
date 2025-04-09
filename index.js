@@ -130,7 +130,7 @@ function run() {
         span_progress.innerText = (progress*100/112).toFixed(1)+'%'
         span_progress.style.background = `linear-gradient(to right, #6e2cff ${progress*100/112}%, #000 ${progress*100/112}%)`
         while (popping()) {}
-        select(0)
+        //select(0)
         return 0
     }
     
