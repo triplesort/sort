@@ -20,30 +20,30 @@ function run() {
     var popped = []
     var progress = 0
     const data = [
-        ["윤서연","SeoYeon","22aeff","fff","aa6721ee-f377-4d8b-edaa-1af78e844f00"],
-        ["정혜린","HyeRin","9200ff","fff","f28b16f4-046e-4c3f-43ce-68b39a9dec00"],
-        ["이지우","JiWoo","fff800","000","83dde759-c871-4b46-afa5-283333923b00"],
-        ["김채연","ChaeYeon","98f21d","000","76907ffa-a859-46b0-6e51-b1cdaa8d3b00"],
-        ["김유연","YooYeon","db0c74","fff","233096a1-8a64-490b-5eb1-b3e00f8eea00"],
-        ["김수민","SooMin","fc83a4","000","297bb399-7bd8-4fd3-9e32-bb8ebe47ed00"],
-        ["김나경","NaKyoung","6799a0","fff","5b7a39c7-406b-434d-ef80-24b53e445400"],
-        ["공유빈","YuBin","ffe3e2","000","fc94989c-be36-429d-0ff9-0a7838db9800"],
-        ["카에데","Kaede","ffc935","000","4f289d2f-6dd2-4057-072a-9c0ac57d7900"],
-        ["서다현","DaHyun","ff9ad6","000","766e9b8f-5af0-4b29-4df8-5643fb19b700"],
-        ["코토네","Kotone","ffde00","000","b348e441-9e74-4b1c-4f35-6b5f7a8c9c00"],
-        ["곽연지","YeonJi","5974ff","fff","4c6bdee9-fad9-439e-1616-a6817d050800"],
-        ["니엔","Nien","ff953f","000","ea57cbda-0a93-4c05-9c06-8bffb0728500"],
-        ["박소현","SoHyun","1222b5","fff","1b3054a6-bd1c-4d26-24d4-a8c3ade24700"],
-        ["신위","Xinyu","d51313","fff","380f2ff3-b690-4b80-93b8-be5af529a000"],
-        ["마유","Mayu","fe8e76","000","9d99d7a5-54b6-4b28-891b-6aae450c0600"],
-        ["린","Lynn","ac62b7","fff","bc97a137-d3d5-469d-8e0b-78a31731fa00"],
-        ["주빈","JooBin","b7f54c","000","81067b94-62a0-4024-9feb-d97baccfc700"],
-        ["정하연","HaYeon","52d9bb","000","35080be2-380e-4c2e-72ff-21306c793100"],
-        ["박시온","ShiOn","ff428a","fff","e464e0e0-d48c-4438-e560-4b56f2d51900"],
-        ["김채원","ChaeWon","c7a3e0","000","d9379cd6-0959-47d4-f4f6-315cfdb7f000"],
-        ["설린","Sullin","7bba8d","000","2a3d9150-5e68-43d6-bbcf-41fd9c358600"],
-        ["서아","SeoAh","cff3ff","000","e429aa91-95ac-4688-2b2f-9fab96dba000"],
-        ["지연","JiYeon","ffab62","000","b84deb0e-42be-4028-5766-d2562822a700"]
+        ["윤서연","SeoYeon","22aeff","fff","42867d41-0bfa-4621-3443-582335cea700"],
+        ["정혜린","HyeRin","9200ff","fff","8a63e7b6-f32d-47c6-0673-61cb194f2500"],
+        ["이지우","JiWoo","fff800","000","7c9b67a3-30b1-4af8-c1f9-d2b20b6eec00"],
+        ["김채연","ChaeYeon","98f21d","000","205bc405-7fc2-459c-34da-ddee0681ae00"],
+        ["김유연","YooYeon","db0c74","fff","72f940ef-3efe-4a2b-7bc3-3a310586c100"],
+        ["김수민","SooMin","fc83a4","000","5c4fa552-67d9-46bb-7c59-2e908e89d800"],
+        ["김나경","NaKyoung","6799a0","fff","aeee9b5c-32ff-4510-23ba-9a5aec49f500"],
+        ["공유빈","YuBin","ffe3e2","000","72a33977-96ce-4347-1dd5-d9f5127f0600"],
+        ["카에데","Kaede","ffc935","000","fe191efe-ec6f-449b-dae4-3f8c0ce68d00"],
+        ["서다현","DaHyun","ff9ad6","000","32aa4a12-6742-4fe1-f406-402a86c61400"],
+        ["코토네","Kotone","ffde00","000","653c2486-0386-46b6-1a34-6826432f6b00"],
+        ["곽연지","YeonJi","5974ff","fff","6f404018-bee1-4e1e-8e43-364c1cf3d000"],
+        ["니엔","Nien","ff953f","000","df91388e-fbab-4947-354b-992bddeaea00"],
+        ["박소현","SoHyun","1222b5","fff","6c93ce8d-f23e-4f8c-1c5a-f4db4b492300"],
+        ["신위","Xinyu","d51313","fff","c5c0f2c0-2f5f-4ba8-0790-cb6498fd5d00"],
+        ["마유","Mayu","fe8e76","000","ab88afe6-9407-460f-3b96-47b4a8d42200"],
+        ["린","Lynn","ac62b7","fff","2c5f1ae8-99df-43d7-8ea5-a1ad86d8cc00"],
+        ["주빈","JooBin","b7f54c","000","98e28ae8-4535-411e-719a-d686cd5d6b00"],
+        ["정하연","HaYeon","52d9bb","000","bd649903-860f-430b-70e7-11e3bee07200"],
+        ["박시온","ShiOn","ff428a","fff","9a4c0082-01e8-4483-df6e-0418281c6200"],
+        ["김채원","ChaeWon","c7a3e0","000","ae595c76-1111-45c4-45e7-dfbf21c8a600"],
+        ["설린","Sullin","7bba8d","000","294b47d4-3814-4526-f877-6f60a6480000"],
+        ["서아","SeoAh","cff3ff","000","56fc9299-0c81-468a-3b1b-43523ab48700"],
+        ["지연","JiYeon","ffab62","000","994de483-c445-43af-690c-952c32c5e800"]
     ]
 
     data.forEach(i=>{
@@ -104,7 +104,7 @@ function run() {
             element.addEventListener('click',handler)
             // setTimeout(()=>{
             // },250)
-        }, 170);
+        }, 180);
         return 0
     }
     

@@ -84,7 +84,7 @@ member {
     display: inline-block;
     padding: 10px;
     font-weight: bold;
-    transition: transform 0.17s linear;
+    transition: transform 0.18s linear;
 }
 img {
     width: 100%;
