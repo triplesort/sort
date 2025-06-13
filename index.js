@@ -104,7 +104,7 @@ function run() {
             element.addEventListener('click',handler)
             // setTimeout(()=>{
             // },250)
-        }, 250);
+        }, 170);
         return 0
     }
     
