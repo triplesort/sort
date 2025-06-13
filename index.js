@@ -45,6 +45,12 @@ function run() {
         ["서아","SeoAh","cff3ff","000","e429aa91-95ac-4688-2b2f-9fab96dba000"],
         ["지연","JiYeon","ffab62","000","b84deb0e-42be-4028-5766-d2562822a700"]
     ]
+
+    data.forEach(i=>{
+        const img = new Image()
+        img.src = 'https://imagedelivery.net/qQuMkbHJ-0s6rwu8vup_5w/'+i[4]+'/thumbnail'
+        i.push(img)
+    })
     
     function popping() {
         if (queue.length==0) {
@@ -62,9 +68,17 @@ function run() {
             if (Math.random()<0.5) {
                 display(btn_left,left,select0)
                 display(btn_right,right,select1)
+                // setTimeout(()=>{
+                //     if (data.indexOf(left) > data.indexOf(right)) btn_left.click()
+                //     else btn_right.click()
+                // },10)
             } else {
                 display(btn_right,left,select0)
                 display(btn_left,right,select1)
+                // setTimeout(() => {
+                //     if (data.indexOf(left) > data.indexOf(right)) btn_right.click()
+                //     else btn_left.click()
+                // }, 10);
             }
             // const final = new Array(24).fill().map((v,i)=>(callData('a600'+String(i).padStart(2,'0'))||[undefined])[0])
             // console.log(final)    
@@ -75,16 +89,22 @@ function run() {
     }
 
     function display(element,source,handler) {
-        element.innerHTML = ''
-        const img = document.createElement('img')
-        img.src = 'https://imagedelivery.net/qQuMkbHJ-0s6rwu8vup_5w/'+source[4]+'/thumbnail'
+        // const img = document.createElement('img')
+        // img.src = 'https://imagedelivery.net/qQuMkbHJ-0s6rwu8vup_5w/'+source[4]+'/thumbnail'
+        const img = source[5]
         const span = document.createElement('span')
-        span.innerText = source[language]
-        element.style.background = '#'+source[2]
-        element.style.color = '#'+source[3]
-        element.append(img)
-        element.append(span)
-        element.addEventListener('click',handler)
+        setTimeout(() => {
+            element.innerHTML = ''
+            span.innerText = source[language]
+            element.style.background = '#'+source[2]
+            element.style.color = '#'+source[3]
+            element.append(img)
+            element.append(span)
+            element.style.transform = "rotateY(0)"
+            element.addEventListener('click',handler)
+            // setTimeout(()=>{
+            // },250)
+        }, 250);
         return 0
     }
     
@@ -104,8 +124,10 @@ function run() {
         btn_right.removeEventListener('click',select0)
         btn_left.removeEventListener('click',select1)
         btn_right.removeEventListener('click',select1)
-        btn_left.innerHTML = `<p>Loading</p>`
-        btn_right.innerHTML = `<p>Loading</p>`
+        // btn_left.innerHTML = `<p>Loading</p>`
+        // btn_right.innerHTML = `<p>Loading</p>`
+        btn_left.style.transform = "rotateY(90deg)"
+        btn_right.style.transform = "rotateY(90deg)"
         const arrkey = popped[0]
         const arr = obj[arrkey]
         const nextarrkey = arrkey[0]+(parseInt(arrkey[1])+1)
@@ -127,10 +149,15 @@ function run() {
             queue.push([popped[0],popped[1],popped[2]+1-num,popped[3]+num])
         }
         popped=[]
+        // console.log(progress)
+        // console.log(JSON.stringify(obj,undefined,2))
+        // console.log(obj)
+        // console.log(Object.values(obj).map(u=>u.map(v=>v.join()).join('/')).join('\n'))
+        // console.log(queue.join('\n'))
         span_progress.innerText = (progress*100/112).toFixed(1)+'%'
         span_progress.style.background = `linear-gradient(to right, #6e2cff ${progress*100/112}%, #000 ${progress*100/112}%)`
         while (popping()) {}
-        //select(0)
+        // select(0)
         return 0
     }
     
@@ -139,30 +166,57 @@ function run() {
         btn_left.remove()
         btn_right.remove()
         const final = obj.a6[0].map(v=>callData(v))
+        const prev = JSON.parse(localStorage.getItem("prevResults"))
+        var prevDate
+        if (prev) {
+            prevDate = new Date(prev.date)
+            prev.results.forEach((v,i)=>final.find(x=>x[1]==v).push(i))
+        }
         localStorage.setItem("prevResults",JSON.stringify({"date":Date.now(),"results":final.map(v=>v[1])}))
-        const content = final.map(v=>`<tr><td>${final.indexOf(v)+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td></tr>`).join('')
+        const content = final.map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td></tr>`).join('')
+        // const content = final.map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td>${prev?`<td>${v[6]-i>0?"▲"+(v[6]-i):v[6]-i<0?"▼"+(i-v[6]):"-"}</td>`:''}</tr>`).join('')
         const content2 = final.slice(0,12).map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td><td>${i+13}</td><td style="background:#${final[i+12][2]};color:#${final[i+12][3]}">${final[i+12][language]}</td></tr>`).join('')
+        const content3 = final.map((v,i)=>`<tr><td>${i+1}${prev?` <span style="font-size:0.75em;color:${v[6]-i>0?"red":v[6]-i<0?"blue":"grey"}">(${v[6]-i>0?"▲"+(v[6]-i):v[6]-i<0?"▼"+(i-v[6]):"-"})</span>`:''}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td></tr>`).join('')
+        // const content3 = final.map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}${prev?` (${v[6]-i>0?"▲"+(v[6]-i):v[6]-i<0?"▼"+(i-v[6]):"-"})`:''}</td></tr>`).join('')
+        const content4 = final.slice(0,12).map((v,i)=>`<tr><td>${i+1}${prev?` <span style="font-size:0.75em;color:${v[6]-i>0?"red":v[6]-i<0?"blue":"grey"}">(${v[6]-i>0?"▲"+(v[6]-i):v[6]-i<0?"▼"+(i-v[6]):"-"})</span>`:''}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td><td>${i+13}${prev?` <span style="font-size:0.75em;color:${final[i+12][6]-i-12>0?"red":final[i+12][6]-i-12<0?"blue":"grey"}">(${final[i+12][6]-i-12>0?"▲"+(final[i+12][6]-i-12):final[i+12][6]-i-12<0?"▼"+(i+12-final[i+12][6]):"-"})</span>`:''}</td><td style="background:#${final[i+12][2]};color:#${final[i+12][3]}">${final[i+12][language]}</td></tr>`).join('')
+        // const content4 = final.slice(0,12).map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}${prev?` (${v[6]-i>0?"▲"+(v[6]-i):v[6]-i<0?"▼"+(i-v[6]):"-"})`:''}</td><td>${i+13}</td><td style="background:#${final[i+12][2]};color:#${final[i+12][3]}">${final[i+12][language]}${prev?` (${final[i+12][6]-i-12>0?"▲"+(final[i+12][6]-i-12):final[i+12][6]-i-12<0?"▼"+(i+12-final[i+12][6]):"-"})`:''}</td></tr>`).join('')
+        // const content4 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23].map(i=>`<tr><td>${i+1}</td><td style="background:#${final[i][2]};color:#${final[i][3]}">${final[i][language]}</td><td style="background:#${prevFinal[i][2]};color:#${prevFinal[i][3]}">${prevFinal[i][language]}</td></tr>`).join('')
         const table = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${content}</tbody></table>`
         const table2 = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${content2}</tbody></table>`
+        const table3 = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${content3}</tbody></table>`
+        const table4 = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${content4}</tbody></table>`
+        // const table3 = `<table><thead><tr><th></th><th>${new Date().getMonth()+1}/${new Date().getDate()}</th><th>${prevDate.getMonth()+1}/${prevDate.getDate()}</th><tr></thead><tbody>${content3}</tbody></table>`
         span_progress.remove()
         document.querySelector('footer').remove()
         const btn_save = document.createElement('button')
         const btn_mode = document.createElement('button')
+        const btn_compare = document.createElement('button')
         const btn_save_wrap = document.createElement('div')
         const overflowArea = document.createElement('div')
         btn_save.addEventListener('click',()=>{
             capture()
         })
         var tableMode = 0
+        var tableCompare = 0
         const tablewrap = document.createElement('table-wrap')
         tablewrap.style.display="inline-block";
         overflowArea.style.overflowX="auto";
         overflowArea.style.width="100%";
         btn_mode.addEventListener('click',()=>{
-            if (tableMode) {
+            if (tableMode&&tableCompare) {
+                tablewrap.innerHTML = table3
+                btn_mode.innerHTML = language ? '2 columns' : '두 줄로'
+                tableMode=0
+            }
+            else if (tableMode) {
                 tablewrap.innerHTML = table
                 btn_mode.innerHTML = language ? '2 columns' : '두 줄로'
                 tableMode=0
+            }
+            else if (tableCompare) {
+                tablewrap.innerHTML = table4
+                btn_mode.innerHTML = language ? '1 column' : '한 줄로'
+                tableMode=1
             }
             else {
                 tablewrap.innerHTML = table2
@@ -170,12 +224,35 @@ function run() {
                 tableMode=1
             }
         })
+        btn_compare.addEventListener('click',()=>{
+            if (tableCompare&&tableMode) {
+                tablewrap.innerHTML = table2
+                tableCompare=0
+            }
+            else if (tableCompare) {
+                tablewrap.innerHTML = table
+                tableCompare=0
+            }
+            else if (tableMode) {
+                tablewrap.innerHTML = table4
+                tableCompare=1
+            }
+            else {
+                tablewrap.innerHTML = table3
+                tableCompare=1
+            }
+        })
         btn_save.innerHTML = language ? 'Save' : '저장'
         btn_save.style.cssText = 'margin:10px !important'
         btn_mode.innerHTML = language ? '2 lines' : '두 줄로'
         btn_mode.style.cssText = 'margin:10px !important'
+        btn_compare.innerHTML = language ? 'Compare' : '비교'
+        btn_compare.style.cssText = 'margin:10px !important'
         btn_save_wrap.append(btn_save)
         btn_save_wrap.append(btn_mode)
+        if (prev) {
+            btn_save_wrap.append(btn_compare)
+        }
         tablewrap.innerHTML = table
         document.querySelector('article').append(btn_save_wrap)
         document.querySelector('article').append(overflowArea)
