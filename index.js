@@ -1,10 +1,16 @@
 function run() {
-    document.querySelector('article').innerHTML='<button-wrap />'
-    document.querySelector('footer').innerHTML=''
-    const btn_left = document.createElement('member')
-    const btn_right = document.createElement('member')
-    const span_progress = document.createElement('p')
-    span_progress.innerText = '0.0%'
+    qs = s => document.querySelector(s)
+    ce = s => document.createElement(s)
+    innerH = (e,c) => e.innerHTML = c
+    innerT = (e,c) => e.innerText = c
+    append = (p,c) => p.append(c)
+
+    innerH(qs('article'),'<button-wrap />')
+    innerH(qs('footer'),'')
+    const btn_left = ce('member')
+    const btn_right = ce('member')
+    const span_progress = ce('p')
+    innerT(span_progress,'0.0%')
     span_progress.style.color = '#fff'
     span_progress.style.width = '90%'
     span_progress.style.background = `#000`
@@ -20,30 +26,30 @@ function run() {
     var popped = []
     var progress = 0
     const data = [
-        ["윤서연","SeoYeon","22aeff","fff","42867d41-0bfa-4621-3443-582335cea700"],
-        ["정혜린","HyeRin","9200ff","fff","8a63e7b6-f32d-47c6-0673-61cb194f2500"],
-        ["이지우","JiWoo","fff800","000","7c9b67a3-30b1-4af8-c1f9-d2b20b6eec00"],
-        ["김채연","ChaeYeon","98f21d","000","205bc405-7fc2-459c-34da-ddee0681ae00"],
-        ["김유연","YooYeon","db0c74","fff","72f940ef-3efe-4a2b-7bc3-3a310586c100"],
-        ["김수민","SooMin","fc83a4","000","5c4fa552-67d9-46bb-7c59-2e908e89d800"],
-        ["김나경","NaKyoung","6799a0","fff","aeee9b5c-32ff-4510-23ba-9a5aec49f500"],
-        ["공유빈","YuBin","ffe3e2","000","72a33977-96ce-4347-1dd5-d9f5127f0600"],
-        ["카에데","Kaede","ffc935","000","fe191efe-ec6f-449b-dae4-3f8c0ce68d00"],
-        ["서다현","DaHyun","ff9ad6","000","32aa4a12-6742-4fe1-f406-402a86c61400"],
-        ["코토네","Kotone","ffde00","000","653c2486-0386-46b6-1a34-6826432f6b00"],
-        ["곽연지","YeonJi","5974ff","fff","6f404018-bee1-4e1e-8e43-364c1cf3d000"],
-        ["니엔","Nien","ff953f","000","df91388e-fbab-4947-354b-992bddeaea00"],
-        ["박소현","SoHyun","1222b5","fff","6c93ce8d-f23e-4f8c-1c5a-f4db4b492300"],
-        ["신위","Xinyu","d51313","fff","c5c0f2c0-2f5f-4ba8-0790-cb6498fd5d00"],
-        ["마유","Mayu","fe8e76","000","ab88afe6-9407-460f-3b96-47b4a8d42200"],
-        ["린","Lynn","ac62b7","fff","2c5f1ae8-99df-43d7-8ea5-a1ad86d8cc00"],
-        ["주빈","JooBin","b7f54c","000","98e28ae8-4535-411e-719a-d686cd5d6b00"],
-        ["정하연","HaYeon","52d9bb","000","bd649903-860f-430b-70e7-11e3bee07200"],
-        ["박시온","ShiOn","ff428a","fff","9a4c0082-01e8-4483-df6e-0418281c6200"],
-        ["김채원","ChaeWon","c7a3e0","000","ae595c76-1111-45c4-45e7-dfbf21c8a600"],
-        ["설린","Sullin","7bba8d","000","294b47d4-3814-4526-f877-6f60a6480000"],
-        ["서아","SeoAh","cff3ff","000","56fc9299-0c81-468a-3b1b-43523ab48700"],
-        ["지연","JiYeon","ffab62","000","994de483-c445-43af-690c-952c32c5e800"]
+        ["윤서연","SeoYeon","22aeff","fff","81705f26-becd-49c2-d82e-2cd7b2d58600"],
+        ["정혜린","HyeRin","9200ff","fff","0c0e1bec-b9f1-4148-a9bc-f6bd2caa2900"],
+        ["이지우","JiWoo","fff800","000","25e61d21-6a16-48da-0360-cf0b19aa5200"],
+        ["김채연","ChaeYeon","98f21d","000","75d6de2f-6e2d-4478-6998-f5e890fc3500"],
+        ["김유연","YooYeon","db0c74","fff","5883e7ba-1204-4629-03f9-70570576c500"],
+        ["김수민","SooMin","fc83a4","000","b5ad778a-f794-4bca-8756-1c83807d5800"],
+        ["김나경","NaKyoung","6799a0","fff","60745423-b026-4750-bf96-d1671e196800"],
+        ["공유빈","YuBin","ffe3e2","000","f4178d87-4a67-448d-28f6-ffb876305300"],
+        ["카에데","Kaede","ffc935","000","79f33df8-b0c9-47b7-60e0-da705e77e500"],
+        ["서다현","DaHyun","ff9ad6","000","2b6bcaf8-8ac7-40e4-10cf-0acc5dc50000"],
+        ["코토네","Kotone","ffde00","000","b29e2350-fb52-4b0e-6731-051b2e4aaf00"],
+        ["곽연지","YeonJi","5974ff","fff","84aaa919-14a8-4439-89b8-8f7850510a00"],
+        ["니엔","Nien","ff953f","000","eeec64f7-28a5-45cf-2794-d99c0189a900"],
+        ["박소현","SoHyun","1222b5","fff","e677a38c-7b5b-4819-f5b8-a641dd46f800"],
+        ["신위","Xinyu","d51313","fff","f9938b82-3ca9-4535-268b-c62d656ece00"],
+        ["마유","Mayu","fe8e76","000","0c7a91c3-a8f1-4fbc-9079-22e4269fb000"],
+        ["린","Lynn","ac62b7","fff","bd445d60-a78f-4458-49e1-5b0568aff600"],
+        ["주빈","JooBin","b7f54c","000","5a0913d9-46e5-4669-758c-64dbb45d1c00"],
+        ["정하연","HaYeon","52d9bb","000","d0e2aa97-5932-468c-b5c5-c169408acc00"],
+        ["박시온","ShiOn","ff428a","fff","2b07ffb1-3fe7-44ce-1663-031db0e68600"],
+        ["김채원","ChaeWon","c7a3e0","000","f4d08676-a67e-45d2-33d1-05a1f5163b00"],
+        ["설린","Sullin","7bba8d","000","3786b239-4b83-4d62-0040-884e73281900"],
+        ["서아","SeoAh","cff3ff","000","52cbc4bd-00b1-4fb8-daab-0b2a057e8600"],
+        ["지연","JiYeon","ffab62","000","8214bbdc-eaf5-4b3b-6a53-0dd3b7387e00"]
     ]
 
     data.forEach(i=>{
@@ -54,8 +60,7 @@ function run() {
     
     function popping() {
         if (queue.length==0) {
-            result()
-            return 0
+            return result()
         }
         const index = Math.floor(queue.length * Math.random())
         popped = queue[index]
@@ -65,46 +70,31 @@ function run() {
         if (left && right) {
             queue.splice(queue.indexOf(popped),1)
             if (progress) localStorage.setItem("suspended",JSON.stringify({"obj":obj,"queue":queue,"popped":popped,"progress":progress}))
-            if (Math.random()<0.5) {
-                display(btn_left,left,select0)
-                display(btn_right,right,select1)
-                // setTimeout(()=>{
-                //     if (data.indexOf(left) > data.indexOf(right)) btn_left.click()
-                //     else btn_right.click()
-                // },10)
-            } else {
-                display(btn_right,left,select0)
-                display(btn_left,right,select1)
-                // setTimeout(() => {
-                //     if (data.indexOf(left) > data.indexOf(right)) btn_right.click()
-                //     else btn_left.click()
-                // }, 10);
-            }
-            // const final = new Array(24).fill().map((v,i)=>(callData('a600'+String(i).padStart(2,'0'))||[undefined])[0])
-            // console.log(final)    
-            return 0
+            return (Math.random()<0.5) ? display(left,right,select0,select1) : display(right,left,select1,select0)
         } else {
             return 1
         }
     }
 
-    function display(element,source,handler) {
-        // const img = document.createElement('img')
-        // img.src = 'https://imagedelivery.net/qQuMkbHJ-0s6rwu8vup_5w/'+source[4]+'/thumbnail'
+    function displayOne(element,source,handler) {
         const img = source[5]
-        const span = document.createElement('span')
+        const span = ce('span')
         setTimeout(() => {
-            element.innerHTML = ''
-            span.innerText = source[language]
+            innerH(element,'')
+            innerT(span,source[language])
             element.style.background = '#'+source[2]
             element.style.color = '#'+source[3]
-            element.append(img)
-            element.append(span)
+            append(element,img)
+            append(element,span)
             element.style.transform = "rotateY(0)"
             element.addEventListener('click',handler)
-            // setTimeout(()=>{
-            // },250)
         }, 180);
+        return 0
+    }
+
+    function display(left,right,handlerL,handlerR) {
+        displayOne(btn_left,left,handlerL)
+        displayOne(btn_right,right,handlerR)
         return 0
     }
     
@@ -124,8 +114,6 @@ function run() {
         btn_right.removeEventListener('click',select0)
         btn_left.removeEventListener('click',select1)
         btn_right.removeEventListener('click',select1)
-        // btn_left.innerHTML = `<p>Loading</p>`
-        // btn_right.innerHTML = `<p>Loading</p>`
         btn_left.style.transform = "rotateY(90deg)"
         btn_right.style.transform = "rotateY(90deg)"
         const arrkey = popped[0]
@@ -149,12 +137,7 @@ function run() {
             queue.push([popped[0],popped[1],popped[2]+1-num,popped[3]+num])
         }
         popped=[]
-        // console.log(progress)
-        // console.log(JSON.stringify(obj,undefined,2))
-        // console.log(obj)
-        // console.log(Object.values(obj).map(u=>u.map(v=>v.join()).join('/')).join('\n'))
-        // console.log(queue.join('\n'))
-        span_progress.innerText = (progress*100/112).toFixed(1)+'%'
+        innerT(span_progress,(progress*100/112).toFixed(1)+'%')
         span_progress.style.background = `linear-gradient(to right, #6e2cff ${progress*100/112}%, #000 ${progress*100/112}%)`
         while (popping()) {}
         // select(0)
@@ -167,115 +150,104 @@ function run() {
         btn_right.remove()
         const final = obj.a6[0].map(v=>callData(v))
         const prev = JSON.parse(localStorage.getItem("prevResults"))
-        var prevDate
-        if (prev) {
-            prevDate = new Date(prev.date)
-            prev.results.forEach((v,i)=>final.find(x=>x[1]==v).push(i))
-        }
+        if (prev) prev.results.forEach((v,i)=>final.find(x=>x[1]==v).push(i))
         localStorage.setItem("prevResults",JSON.stringify({"date":Date.now(),"results":final.map(v=>v[1])}))
-        const content = final.map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td></tr>`).join('')
-        // const content = final.map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td>${prev?`<td>${v[6]-i>0?"▲"+(v[6]-i):v[6]-i<0?"▼"+(i-v[6]):"-"}</td>`:''}</tr>`).join('')
-        const content2 = final.slice(0,12).map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td><td>${i+13}</td><td style="background:#${final[i+12][2]};color:#${final[i+12][3]}">${final[i+12][language]}</td></tr>`).join('')
-        const content3 = final.map((v,i)=>`<tr><td>${i+1}${prev?` <span style="font-size:0.75em;color:${v[6]-i>0?"red":v[6]-i<0?"blue":"grey"}">(${v[6]-i>0?"▲"+(v[6]-i):v[6]-i<0?"▼"+(i-v[6]):"-"})</span>`:''}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td></tr>`).join('')
-        // const content3 = final.map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}${prev?` (${v[6]-i>0?"▲"+(v[6]-i):v[6]-i<0?"▼"+(i-v[6]):"-"})`:''}</td></tr>`).join('')
-        const content4 = final.slice(0,12).map((v,i)=>`<tr><td>${i+1}${prev?` <span style="font-size:0.75em;color:${v[6]-i>0?"red":v[6]-i<0?"blue":"grey"}">(${v[6]-i>0?"▲"+(v[6]-i):v[6]-i<0?"▼"+(i-v[6]):"-"})</span>`:''}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td><td>${i+13}${prev?` <span style="font-size:0.75em;color:${final[i+12][6]-i-12>0?"red":final[i+12][6]-i-12<0?"blue":"grey"}">(${final[i+12][6]-i-12>0?"▲"+(final[i+12][6]-i-12):final[i+12][6]-i-12<0?"▼"+(i+12-final[i+12][6]):"-"})</span>`:''}</td><td style="background:#${final[i+12][2]};color:#${final[i+12][3]}">${final[i+12][language]}</td></tr>`).join('')
-        // const content4 = final.slice(0,12).map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}${prev?` (${v[6]-i>0?"▲"+(v[6]-i):v[6]-i<0?"▼"+(i-v[6]):"-"})`:''}</td><td>${i+13}</td><td style="background:#${final[i+12][2]};color:#${final[i+12][3]}">${final[i+12][language]}${prev?` (${final[i+12][6]-i-12>0?"▲"+(final[i+12][6]-i-12):final[i+12][6]-i-12<0?"▼"+(i+12-final[i+12][6]):"-"})`:''}</td></tr>`).join('')
-        // const content4 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23].map(i=>`<tr><td>${i+1}</td><td style="background:#${final[i][2]};color:#${final[i][3]}">${final[i][language]}</td><td style="background:#${prevFinal[i][2]};color:#${prevFinal[i][3]}">${prevFinal[i][language]}</td></tr>`).join('')
-        const table = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${content}</tbody></table>`
-        const table2 = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${content2}</tbody></table>`
-        const table3 = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${content3}</tbody></table>`
-        const table4 = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${content4}</tbody></table>`
-        // const table3 = `<table><thead><tr><th></th><th>${new Date().getMonth()+1}/${new Date().getDate()}</th><th>${prevDate.getMonth()+1}/${prevDate.getDate()}</th><tr></thead><tbody>${content3}</tbody></table>`
+        const contentOneOff = final.map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td></tr>`).join('')
+        const contentTwoOff = final.slice(0,12).map((v,i)=>`<tr><td>${i+1}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td><td>${i+13}</td><td style="background:#${final[i+12][2]};color:#${final[i+12][3]}">${final[i+12][language]}</td></tr>`).join('')
+        const contentOneOn = final.map((v,i)=>`<tr><td>${i+1}${prev?` <span style="font-size:0.75em;color:${v[6]-i>0?"red":v[6]-i<0?"blue":"grey"}">(${v[6]-i>0?"▲"+(v[6]-i):v[6]-i<0?"▼"+(i-v[6]):"-"})</span>`:''}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td></tr>`).join('')
+        const contentTwoOn = final.slice(0,12).map((v,i)=>`<tr><td>${i+1}${prev?` <span style="font-size:0.75em;color:${v[6]-i>0?"red":v[6]-i<0?"blue":"grey"}">(${v[6]-i>0?"▲"+(v[6]-i):v[6]-i<0?"▼"+(i-v[6]):"-"})</span>`:''}</td><td style="background:#${v[2]};color:#${v[3]}">${v[language]}</td><td>${i+13}${prev?` <span style="font-size:0.75em;color:${final[i+12][6]-i-12>0?"red":final[i+12][6]-i-12<0?"blue":"grey"}">(${final[i+12][6]-i-12>0?"▲"+(final[i+12][6]-i-12):final[i+12][6]-i-12<0?"▼"+(i+12-final[i+12][6]):"-"})</span>`:''}</td><td style="background:#${final[i+12][2]};color:#${final[i+12][3]}">${final[i+12][language]}</td></tr>`).join('')
+        const tableOneOff = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${contentOneOff}</tbody></table>`
+        const tableTwoOff = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${contentTwoOff}</tbody></table>`
+        const tableOneOn = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${contentOneOn}</tbody></table>`
+        const tableTwoOn = `<table><thead><tr><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><th>${language?'Rank':'순위'}</th><th>${language?'Name':'이름'}</th><tr></thead><tbody>${contentTwoOn}</tbody></table>`
         span_progress.remove()
-        document.querySelector('footer').remove()
-        const btn_save = document.createElement('button')
-        const btn_mode = document.createElement('button')
-        const btn_compare = document.createElement('button')
-        const btn_save_wrap = document.createElement('div')
-        const overflowArea = document.createElement('div')
+        qs('footer').remove()
+        const btn_save = ce('button')
+        const btn_mode = ce('button')
+        const btn_compare = ce('button')
+        const btn_save_wrap = ce('div')
+        const overflowArea = ce('div')
         btn_save.addEventListener('click',()=>{
             capture()
         })
-        var tableMode = 0
-        var tableCompare = 0
-        const tablewrap = document.createElement('table-wrap')
+        var twoColumn = true
+        var compareOn = false
+        const tablewrap = ce('table-wrap')
         tablewrap.style.display="inline-block";
         overflowArea.style.overflowX="auto";
         overflowArea.style.width="100%";
         btn_mode.addEventListener('click',()=>{
-            if (tableMode&&tableCompare) {
-                tablewrap.innerHTML = table3
-                btn_mode.innerHTML = language ? '2 columns' : '두 줄로'
-                tableMode=0
+            if (twoColumn&&compareOn) {
+                innerH(tablewrap,tableOneOn)
+                innerH(btn_mode,language ? '2 columns' : '두 줄로')
+                twoColumn=false
             }
-            else if (tableMode) {
-                tablewrap.innerHTML = table
-                btn_mode.innerHTML = language ? '2 columns' : '두 줄로'
-                tableMode=0
+            else if (twoColumn) {
+                innerH(tablewrap,tableOneOff)
+                innerH(btn_mode,language ? '2 columns' : '두 줄로')
+                twoColumn=false
             }
-            else if (tableCompare) {
-                tablewrap.innerHTML = table4
-                btn_mode.innerHTML = language ? '1 column' : '한 줄로'
-                tableMode=1
+            else if (compareOn) {
+                innerH(tablewrap,tableTwoOn)
+                innerH(btn_mode,language ? '1 column' : '한 줄로')
+                twoColumn=true
             }
             else {
-                tablewrap.innerHTML = table2
-                btn_mode.innerHTML = language ? '1 column' : '한 줄로'
-                tableMode=1
+                innerH(tablewrap,tableTwoOff)
+                innerH(btn_mode,language ? '1 column' : '한 줄로')
+                twoColumn=true
             }
         })
         btn_compare.addEventListener('click',()=>{
-            if (tableCompare&&tableMode) {
-                tablewrap.innerHTML = table2
-                tableCompare=0
+            if (compareOn&&twoColumn) {
+                innerH(tablewrap,tableTwoOff)
+                compareOn=false
             }
-            else if (tableCompare) {
-                tablewrap.innerHTML = table
-                tableCompare=0
+            else if (compareOn) {
+                innerH(tablewrap,tableOneOff)
+                compareOn=false
             }
-            else if (tableMode) {
-                tablewrap.innerHTML = table4
-                tableCompare=1
+            else if (twoColumn) {
+                innerH(tablewrap,tableTwoOn)
+                compareOn=true
             }
             else {
-                tablewrap.innerHTML = table3
-                tableCompare=1
+                innerH(tablewrap,tableOneOn)
+                compareOn=true
             }
         })
-        btn_save.innerHTML = language ? 'Save' : '저장'
+        innerH(btn_save,language ? 'Save' : '저장')
         btn_save.style.cssText = 'margin:10px !important'
-        btn_mode.innerHTML = language ? '2 lines' : '두 줄로'
+        innerH(btn_mode,language ? '2 lines' : '두 줄로')
         btn_mode.style.cssText = 'margin:10px !important'
-        btn_compare.innerHTML = language ? 'Compare' : '비교'
+        innerH(btn_compare,language ? 'Compare' : '비교')
         btn_compare.style.cssText = 'margin:10px !important'
-        btn_save_wrap.append(btn_save)
-        btn_save_wrap.append(btn_mode)
-        if (prev) {
-            btn_save_wrap.append(btn_compare)
-        }
-        tablewrap.innerHTML = table
-        document.querySelector('article').append(btn_save_wrap)
-        document.querySelector('article').append(overflowArea)
-        overflowArea.append(tablewrap)
-        document.querySelector('article').style.height = ''
+        append(btn_save_wrap,btn_save)
+        append(btn_save_wrap,btn_mode)
+        if (prev) append(btn_save_wrap,btn_compare)
+        innerH(tablewrap,tableOneOff)
+        append(qs('article'),btn_save_wrap)
+        append(qs('article'),overflowArea)
+        append(overflowArea,tablewrap)
+        qs('article').style.height = ''
         return 0
     }
     
     async function capture() {
-        const span1 = document.createElement('p')
-        span1.innerText = 'https://sort.wav.haus/'
+        const span1 = ce('p')
+        innerT(span1,'https://sort.wav.haus/')
         span1.style.fontSize = '11px'
-        const span2 = document.createElement('p')
-        span2.innerText = 'tripleS Sort'
+        const span2 = ce('p')
+        innerT(span2,'tripleS Sort')
         span2.style.fontWeight = 'bold'
         span2.style.fontSize = '19px'
-        document.querySelector('table-wrap').append(span2)
-        document.querySelector('table-wrap').append(span1)
-        const c = await html2canvas(document.querySelector('table-wrap'), {scale:2})
+        append(qs('table-wrap'),span2)
+        append(qs('table-wrap'),span1)
+        const c = await html2canvas(qs('table-wrap'), {scale:2})
         span1.remove()
         span2.remove()
         c.toBlob(async blob=>{
-            const downloadLink = document.createElement("a");
+            const downloadLink = ce("a");
             downloadLink.download = 'tripleS_sort_'+new Date()*1;
             downloadLink.href = URL.createObjectURL(blob);
             downloadLink.click();
@@ -284,12 +256,10 @@ function run() {
     }
 
     function select0() {
-        select(0)
-        return 0
+        return select(0)
     }
     function select1() {
-        select(1)
-        return 0
+        return select(1)
     }
     
     if (localStorage.getItem("suspended") && confirm(language?"There is a suspended Sort. Do you want to continue?":"중단된 Sort가 있습니다. 계속하시겠습니까?")) {
@@ -303,15 +273,9 @@ function run() {
         const left = callData(arr[popped[1]*2][popped[2]])
         const right = callData(arr[popped[1]*2+1][popped[3]])
         
-        if (Math.random()<0.5) {
-            display(btn_left,left,select0)
-            display(btn_right,right,select1)
-        } else {
-            display(btn_right,left,select0)
-            display(btn_left,right,select1)
-        }
+        (Math.random()<0.5) ? display(left,right,select0,select1) : display(right,left,select1,select0)
 
-        span_progress.innerText = (progress*100/112).toFixed(1)+'%'
+        innerT(span_progress,(progress*100/112).toFixed(1)+'%')
         span_progress.style.background = `linear-gradient(to right, #6e2cff ${progress*100/112}%, #000 ${progress*100/112}%)`
     } else {
         localStorage.suspended = ""
@@ -334,9 +298,9 @@ function run() {
         while (popping()) {}
     }
 
-    document.querySelector('button-wrap').append(btn_left)
-    document.querySelector('button-wrap').append(btn_right)
-    document.querySelector('footer').append(span_progress)
+    append(qs('button-wrap'),btn_left)
+    append(qs('button-wrap'),btn_right)
+    append(qs('footer'),span_progress)
 
     return 0
 }
