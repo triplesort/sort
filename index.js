@@ -170,7 +170,7 @@ function run() {
         btn_save.addEventListener('click',()=>{
             capture()
         })
-        var twoColumn = true
+        var twoColumn = false
         var compareOn = false
         const tablewrap = ce('table-wrap')
         tablewrap.style.display="inline-block";
@@ -273,7 +273,7 @@ function run() {
         const left = callData(arr[popped[1]*2][popped[2]])
         const right = callData(arr[popped[1]*2+1][popped[3]])
         
-        (Math.random()<0.5) ? display(left,right,select0,select1) : display(right,left,select1,select0)
+        Math.random()<0.5 ? display(left,right,select0,select1) : display(right,left,select1,select0)
 
         innerT(span_progress,(progress*100/112).toFixed(1)+'%')
         span_progress.style.background = `linear-gradient(to right, #6e2cff ${progress*100/112}%, #000 ${progress*100/112}%)`
